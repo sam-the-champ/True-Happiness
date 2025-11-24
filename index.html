@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Losing It - A Novel by Simon Hally</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2C3E50;
+      --secondary: #E67E22;
+      --accent: #3498DB;
+      --dark: #1a1a1a;
+      --light: #ECF0F1;
+      --white: #ffffff;
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231e3c72" width="1200" height="600"/><g fill-opacity="0.1"><circle fill="%23fff" cx="200" cy="100" r="150"/><circle fill="%23fff" cx="800" cy="400" r="200"/><circle fill="%23fff" cx="1000" cy="150" r="100"/></g></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      margin-bottom: 1rem;
+      letter-spacing: -2px;
+      text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      margin-bottom: 2rem;
+      opacity: 0.95;
+      font-weight: 300;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      margin-bottom: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      font-style: italic;
+      opacity: 0.9;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 1.2rem 3rem;
+      background: var(--secondary);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(230, 126, 34, 0.4);
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(230, 126, 34, 0.6);
+      background: #d35400;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+
+    /* Video Section */
+    .video-section {
+      padding: 6rem 0;
+      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 3rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .video-container {
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 6rem 0;
+      background: var(--white);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+
+    .book-cover {
+      position: relative;
+      text-align: center;
+    }
+
+    .book-cover img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .book-cover:hover img {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    /* Features Section */
+    .features-section {
+      padding: 6rem 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: var(--white);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 2.5rem;
+      border-radius: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255,255,255,0.2);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      padding: 6rem 0;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .newsletter-form {
+      max-width: 600px;
+      margin: 3rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .newsletter-form input {
+      padding: 1.2rem 1.5rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      background: rgba(255,255,255,0.9);
+      color: var(--dark);
+    }
+
+    .newsletter-form input:focus {
+      outline: none;
+      background: var(--white);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    .newsletter-form button {
+      padding: 1.2rem 3rem;
+      border: 2px solid var(--white);
+      background: transparent;
+      color: var(--white);
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+      background: var(--white);
+      color: #f5576c;
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    footer {
+      padding: 2rem 0;
+      background: var(--dark);
+      color: var(--white);
+      text-align: center;
+    }
+
+    /* Modal/Popup */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      z-index: 999;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--white);
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+      z-index: 1000;
+      width: 90%;
+      max-width: 500px;
+      animation: popIn 0.3s ease-out;
+    }
+
+    .popup h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .popup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .popup-form input {
+      padding: 1rem 1.5rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .popup-form input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #999;
+      transition: color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: var(--primary);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+      }
+      40% {
+        transform: translateY(-10px) translateX(-50%);
+      }
+      60% {
+        transform: translateY(-5px) translateX(-50%);
+      }
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .popup {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Losing It</h1>
+        <p class="hero-subtitle">A Novel by Simon Hally</p>
+        <p class="hero-tagline">When corporate loyalty collides with personal integrity, one photographer must choose between family obligation and his artistic soul.</p>
+        <a href="https://www.amazon.com/Losing-Simon-Hally/dp/1990326358" target="_blank" class="cta-btn">Get Your Copy Now</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <svg width="30" height="50" viewBox="0 0 30 50">
+        <rect x="5" y="5" width="20" height="35" rx="10" fill="none" stroke="white" stroke-width="2"/>
+        <circle cx="15" cy="15" r="3" fill="white">
+          <animate attributeName="cy" from="15" to="30" dur="1.5s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="video-section">
+    <div class="container">
+      <h2 class="section-title">Watch the Book Trailer</h2>
+      <p class="section-subtitle">Discover Peter Skye's journey through corporate intrigue, moral dilemmas, and unexpected romance</p>
+      <div class="video-container">
+        <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+          <source src="myvid.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="book-cover">
+          <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop" alt="Losing It Book Cover" loading="lazy">
+        </div>
+        <div class="about-content">
+          <h2>A Story of Ambition, Integrity & Beer</h2>
+          <p>Wannabe fine art photographer Peter Skye struggles to support himself—and his dog Edwyn—by freelancing for large corporations, even though he's appalled by the way they treat their employees.</p>
+          <p>When his sister Catherine convinces him to help her wealthy husband Lee cover up a road rage incident that threatens to sink his succession to CEO, Peter begrudgingly agrees to work with the company's fixer to hush up the scandal.</p>
+          <p>As events race to a climax, Peter hatches a desperate plan to free his family from the obligations of corporate succession, all the while trying to make ends meet and keep his artistic soul alive.</p>
+          <a href="https://www.amazon.com/Losing-Simon-Hally/dp/1990326358" target="_blank" class="cta-btn">Buy on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <h2 class="section-title">Why Readers Love It</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">😂</div>
+          <h3>Full of Humor</h3>
+          <p>Sharp wit and engaging characters that keep you turning pages.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💼</div>
+          <h3>Corporate Commentary</h3>
+          <p>Insightful observations about ambition and the meaning of success.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📍</div>
+          <h3>Set in Toronto</h3>
+          <p>A vibrant backdrop for this tale of intrigue and suspicion.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🍺</div>
+          <h3>And Beer!</h3>
+          <p>Because every good story needs the right refreshment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <div class="container">
+      <h2 class="section-title">Stay Connected</h2>
+      <p class="section-subtitle">Get updates, exclusive content, and special offers delivered to your inbox</p>
+      <form class="newsletter-form" id="newsletter-form-main" onsubmit="submitForm(event)">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <button type="submit">Subscribe Now</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Simon Hally. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Popup Modal -->
+  <div class="overlay" id="overlay" onclick="closePopup()"></div>
+  <div class="popup" id="popup">
+    <button class="close-btn" onclick="closePopup()">×</button>
+    <h3>Don't Miss Out!</h3>
+    <p>Join our mailing list for exclusive updates and special offers</p>
+    <form class="popup-form" id="popup-form" onsubmit="submitForm(event)">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <button type="submit" class="cta-btn">Subscribe</button>
+    </form>
+  </div>
+
+  <script>
+    let hasShownPopup = false;
+
+    function sendToGoogleForm(data) {
+      const formData = new FormData();
+      formData.append('entry.1825824654', data.name);
+      formData.append('entry.380176177', data.email);
+
+      fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLSeHkRUBYx1ThcaeHUsAwoPXrA40COaBcgmlnLdgDeSX9RyPxg/formResponse', {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      })
+      .then(() => {
+        alert("Thanks for subscribing! Check your inbox for updates.");
+        closePopup();
+      })
+      .catch((error) => {
+        console.error('Form error:', error);
+        alert("Something went wrong. Please try again.");
+      });
+    }
+
+    function submitForm(e) {
+      e.preventDefault();
+      const form = e.target;
+      const name = form.querySelector('input[name="name"]').value;
+      const email = form.querySelector('input[name="email"]').value;
+      sendToGoogleForm({ name, email });
+      form.reset();
+    }
+
+    function showPopup() {
+      if (!hasShownPopup) {
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+        hasShownPopup = true;
+      }
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+    }
+
+    // Show popup on scroll (60% down page)
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > document.body.scrollHeight * 0.6) {
+        showPopup();
+      }
+    });
+
+    // Show popup after 15 seconds
+    setTimeout(showPopup, 15000);
+  </script>
+
+</body>
+</html>
